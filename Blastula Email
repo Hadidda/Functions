@@ -1,0 +1,27 @@
+Email code example:
+
+
+library(blastula)
+library(glue)
+
+
+date_dif <- as.Date("01/27/2024", format = "%m/%d/%Y") - Sys.Date()
+
+
+photo <- add_image("E:\\Documents\\R\\Cruise\\Royal Photo.png")
+
+body_text <- md(glue(
+  "We have {date_dif} days till we leave for the cruise!
+  {photo}
+  "
+)) 
+
+email_body <- compose_email(body = body_text)
+
+smtp_send(
+  email = email_body,
+  subject = "Cruise Countdown!",
+  from = "hadidda193@gmail.com",
+  to = "d-hadidon@onu.edu",
+  credentials = creds_key("gmail")
+)
